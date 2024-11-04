@@ -1,0 +1,29 @@
+from dash import Dash, html, dash_table, dcc, callback, Output, Input
+import pandas as pd
+import plotly.express as px
+
+#setting up our data 
+df = pd.read_csv('DANIEL'S CSV FILE')
+
+#initialize the website
+app = Dash()
+
+#create the layout
+app.layout = [html.Div(children='Basketball Stats Analyzer')]
+              dash_table.DataTable(data=df.to_dict('records'), page_size=10)
+              dcc.Graph(figure=px.histogram(df, x='year', y='cumulative stats', histfunc='avg')
+]
+
+@app.callback(
+    Output('feature-graph', 'figure'),
+    [Input('feature-selector', 'value')]
+)
+
+def update_graph(selected_feature):
+    fig = px.scatter(df, x=df[selected_feature], y=df['species'],
+                     color="species", title=f"{selected_feature} Distribution by Species")
+    return fig
+
+# Run the app
+if __name__ == '__main__':
+    app.run(debug=True)
