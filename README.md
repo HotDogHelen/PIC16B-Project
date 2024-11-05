@@ -1,4 +1,5 @@
 # PIC16B-Project
+# NBA Stats Website
 NBA fantasy basketball team analyzer, using API-based webscraping and building a website that implements user interactions
 
 Project update presentation 1
