@@ -35,7 +35,7 @@ app.layout = html.Div([
 def update_graph(player_name):
     if player_name:
         # Filter the DataFrame for the selected player
-        filtered_df = df[df['Player'].str.contains(player_name, case=False, na=False)]
+        filtered_df = df[df['PLAYER'].str.contains(player_name, case=False, na=False)]
         # Create a bar chart for the player's fantasy stats over the years
         fig = px.bar(
             filtered_df,
