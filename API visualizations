@@ -15,6 +15,7 @@ app.layout = html.Div([
     dcc.Input(
         id='player-name-input',
         type='text',
+        value='James Harden',
         placeholder='Enter Player Name',
         style={'margin-bottom': '20px'}
     ),
