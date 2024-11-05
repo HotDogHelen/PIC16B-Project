@@ -1,0 +1,63 @@
+from dash import Dash, html, dcc, callback, Output, Input
+import pandas as pd
+import plotly.express as px
+
+#setting up our data 
+df = sorted_fantasy_df
+
+#initialize the website
+app = Dash()
+
+#create the layout
+app.layout = html.Div([
+    html.H1("Basketball Fantasy Stats", style={'text-align': 'center'}),
+    html.Hr(),
+    dcc.RadioItems(options=['single', 'compare'],
+        value='single',
+        id='mode-selector'
+    ),
+html.Div([
+        html.Label("Player Name:"),
+        dcc.Input(id='player-name-input', value='DeMar DeRozan', type='text'),
+        html.Label("Second Player Name:"),
+        dcc.Input(id='second-player-name-input', value = 'James Harden', type='text')
+    ]),
+    
+    dcc.Graph(figure={}, id='player-fantasy-graph')
+])
+
+@app.callback(
+    [Output('player-fantasy-graph', 'figure')],
+    [Input('mode-selector', 'value'),
+     Input('player-name-input', 'value'),
+     Input('second-player-name-input', 'value')]
+)
+def update_graph(mode, player_name, second_player_name):
+    fig = px.bar(title="Enter player names to see their fantasy stats")
+    filtered_df = df.sort_values(by='Year')
+    if mode == 'single' and player_name:
+        # Filter for the single player
+        filtered_df = df[df['PLAYER'].str.contains(player_name, case=False, na=False)]
+        fig = px.bar(
+            filtered_df,
+            x='Year',
+            y='Fantasy Points',
+            title=f"{player_name}'s Fantasy Points Over the Years"
+        )
+    elif mode == 'compare' and player_name and second_player_name:
+        # Filter for both players
+        filtered_df = df[df['PLAYER'].str.contains(player_name + '|' + second_player_name, case=False, na=False)]
+        fig = px.bar(
+            filtered_df,
+            x='Year',
+            y='Fantasy Points',
+            color='PLAYER',
+            barmode='group',
+            title=f"Comparison of {player_name} and {second_player_name} Fantasy Points"
+        )
+
+    return [fig] 
+
+# Run the Dash app
+if __name__ == '__main__':
+    app.run_server(debug=True)
