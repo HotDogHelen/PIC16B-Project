@@ -6,6 +6,9 @@ Project update presentation 1
 -pic16b_project file uses API-based scraping to access public data from NBA website
     - had our data concatenated across seasons (2018-2024) and saved it as a csv file
 
+Project update presentation 2
+11/19/24: We added a prediction-based Fantasy dataframe, and input 2 ML models, but still in talks of different models to use and more methods to put in, such as scraping more data.
+
 X . O 
 
 O X X
@@ -18,3 +21,5 @@ O X X
 ...
 
 ...
+
+
