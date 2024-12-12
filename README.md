@@ -9,6 +9,8 @@ Project update presentation 1
 Project update presentation 2
 11/19/24: We added a prediction-based Fantasy dataframe, and input 2 ML models, but still in talks of different models to use and more methods to put in, such as scraping more data.
 
+Once the Dash app is opened, the user can click around and explore the site, hopefully to find whatever data they are interested in learning. 
+
 X . O 
 
 O X X
